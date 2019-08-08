@@ -1,11 +1,15 @@
 <?php
-session_start();
 $LoginEdUserName = isset($_COOKIE['h_userName']) ? $_COOKIE['h_userName'] : "";
 $LoginEdPassWord = isset($_COOKIE['h_passWord']) ? $_COOKIE['h_passWord'] : "";
 $memberLogged_userName = isset($_COOKIE['m_username'])?$_COOKIE['m_username']:'';
 //验证是否登录
-if($LoginEdUserName != "" && $LoginEdPassWord != "")
+if(strlen($LoginEdUserName)>0 && strlen($LoginEdPassWord)>0)
 {
+	error_log("admin pass login, expand session");
+	$expire = time() + 60 * 30;
+	setcookie("h_userName", $LoginEdUserName, $expire,'/');
+	setcookie("h_passWord", $LoginEdPassWord, $expire,'/');
+
 	$sql = "select * from `h_admin` where h_userName = '{$LoginEdUserName}' LIMIT 1";
 	$rsAdmin = $db->get_one($sql);
 }

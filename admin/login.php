@@ -6,7 +6,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/include/conn.php';
 <TITLE>登录</TITLE>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
 <style type="text/css">
-<!--
 body,td,th {font-size: 12px;}
 body {margin-left: 0px;margin-top: 0px;margin-right: 0px;margin-bottom: 0px;}
 .txt {color: #02439F;font-weight: bold;}
@@ -18,7 +17,6 @@ body{
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
 }
--->
 </style>
 <script language="javascript" src="../js/function.js"></script>
 </HEAD>
@@ -47,8 +45,10 @@ if($clause == "chklogin")
 		}
 		else
 		{
-			setcookie("h_userName", $loginName,NULL,'/');
-			setcookie("h_passWord", $md5Pwd,NULL,'/');
+			session_start();
+			$expire = time() + 60 * 30;
+			setcookie("h_userName", $loginName, $expire,'/');
+			setcookie("h_passWord", $md5Pwd, $expire,'/');
 			
 			turnToPage("index.php");
 		}
