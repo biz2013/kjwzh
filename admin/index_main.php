@@ -1,4 +1,7 @@
-<HTML>
+<?php 
+require_once $_SERVER['DOCUMENT_ROOT'] . '/include/conn.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/admin/chkLogged.php';
+?><HTML>
 <HEAD>
 <TITLE>后台管理</TITLE>
 <META http-equiv=Content-Type content="text/html; charset=utf-8">

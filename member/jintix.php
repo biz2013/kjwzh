@@ -23,6 +23,7 @@ $rs = $db->get_one("select *,(select count(id) from `h_member` where h_parentUse
 $filename = $_SERVER['DOCUMENT_ROOT'] . "/images/upload/weixin/" . $user->weixin_qrcode;
 $ready = isset($user->weixin_qrcode) && strlen($user->weixin_qrcode)>0 && file_exists($filename);
 error_log("redeem: looking for file " . $filename);
+$authorized = $rs['h_isPass'] == 1 && $rs['h_isLock']==0;
 
 ?>
 <style>
@@ -37,9 +38,11 @@ error_log("redeem: looking for file " . $filename);
 	<div class="box">
 	    <?php if (!$ready):?> 
 	    <span>请到绑定支付上传微信收款二维码，再来进行提现</span>
-			<?php else: ?>
-			<span> 每次限额5000元，12小时内到账 </span>
-      <?php endif ?>
+            <?php elseif (!$authorized): ?>
+            <span>您的账号没激活，被锁定，或没有提现授权</span>
+            <?php else: ?>
+            <span>每次限额5000元，12小时内到账 </span>
+            <?php endif ?>
 
     	<div class="lo_1 lo_2">
         	<span>您的余额</span>
@@ -62,7 +65,7 @@ ADD COLUMN `qrcode`  varchar(255) NULL AFTER `h_jifen`;
 
  */?>
         </div-->
-		<?php if ($ready) : ?>
+		<?php if ($ready && $authorized) : ?>
 		<div class="lo_2">
 			<div class="layui-upload-list" id="file_box"></div>
 		 </div>

@@ -131,7 +131,7 @@ generateHeader($pageTitle, $webInfo['h_keyword'], $webInfo['h_description']);
         <form name="id_purchase_form" id="id_purchase_form" class="form-horizontal" action="/member/jincz.php" method="post" >
         <input name="weixin" type="hidden" id="weixin" value="<?php echo $user->weixin ?>"/>
         <h3>充值</h3>
-        <div class="alert alert-info col-sm-*">每次限额5000元，12小时内到账</div>
+        <div class="alert alert-info col-sm-*">每次限额<?php echo FCBPayConfig::MAXPURCHASE ?>元，12小时内到账</div>
         <div class="alert alert-success col-sm-*" role="alert" id='success_msg'></div>
         <div class="alert alert-danger col-sm-*" role="alert" id='error_msg'></div>
         <div class="form-group">
