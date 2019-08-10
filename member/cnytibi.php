@@ -11,7 +11,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
-$rs = $db->get_one("select *,(select count(id) from `h_member` where h_parentUserName = a.h_userName and h_isPass = 1) as comMembers from `h_member` a where h_userName = '{$memberLogged_userName}'");
+$rs = $db->get_one("select *,(select count(id) from `h_member` where h_parentUserName = a.h_userName and h_isPass = 1 and h_isLock=0) as comMembers from `h_member` a where h_userName = '{$memberLogged_userName}'");
 $userwallet = new UserWallet();
 $userwallet->load($db, $memberLogged_userName, 'CNYF');
 if (empty($userwallet->walletCrypto)) {

@@ -18,7 +18,7 @@ if (is_null($userwallet)) {
     $userwallet->create($db, $memberLogged_userName, 'CNYF');
 }
 
-$rs = $db->get_one("select *,(select count(id) from `h_member` where h_parentUserName = a.h_userName and h_isPass = 1) as comMembers from `h_member` a where h_userName = '{$memberLogged_userName}'");
+$rs = $db->get_one("select *,(select count(id) from `h_member` where h_parentUserName = a.h_userName and h_isPass = 1 and h_isLock=0) as comMembers from `h_member` a where h_userName = '{$memberLogged_userName}'");
 
 $filename = $_SERVER['DOCUMENT_ROOT'] . "/images/upload/weixin/" . $user->weixin_qrcode;
 $ready = isset($user->weixin_qrcode) && strlen($user->weixin_qrcode)>0 && file_exists($filename);
