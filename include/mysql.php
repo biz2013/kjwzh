@@ -19,6 +19,9 @@ class dbmysql {
 		$query->data_seek(0);
 	}
 
+	function set_autocommit($flag=TRUE) {
+		return $this->link->autocommit($flag);
+	}
 	function begin_trans($flag = MYSQLI_TRANS_START_READ_WRITE) {
 		return $this->link->begin_transaction($flag);
 	}
