@@ -425,8 +425,8 @@ else if($act == 'point2_withdraw'){
 	} catch (PayException $pe) {
 		$db->rollback();
         $err_message = '提现错误:' . $pe->getMessage() . ".  请稍后再试.";
-        error_log("redeem: hit exception " . $pe->getMessage());
-
+		error_log("redeem: hit exception " . $pe->getMessage());
+		echo $err_message;
 	}
 }
 
