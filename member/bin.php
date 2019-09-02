@@ -305,6 +305,7 @@ else if($act == 'point2_withdraw'){
 	error_log("redeem: pass basic checking");
 	
 	//扣钱
+	$db->set_autocommit(FALSE);
 	$db->begin_trans();
 	$sql = "update `h_member` set ";
 	$sql .= "h_alipayUserName = '" . $alipayUserName . "', ";
@@ -415,15 +416,18 @@ else if($act == 'point2_withdraw'){
 			$sql = "update `order` SET trx_bill_no='{$data['trx_bill_no']}' where out_trade_no ='{$out_trade_no}'";
 			$db->query($sql);
 			$db->commit();
+			$db->set_autocommit(TRUE);
 			echo '申请提现成功';
 	
 		} else {
 			$db->rollback();
+			$db->set_autocommit(TRUE);
 			echo '申请提现失败';
 		}
 	
 	} catch (PayException $pe) {
 		$db->rollback();
+		$db->set_autocommit(TRUE);
         $err_message = '提现错误:' . $pe->getMessage() . ".  请稍后再试.";
 		error_log("redeem: hit exception " . $pe->getMessage());
 		echo $err_message;
