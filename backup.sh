@@ -36,3 +36,9 @@ if [ -d "$CNYDIR" ]; then
   output=$(/home/ubuntu/.local/bin/aws s3 cp /home/ubuntu/workspace/kjwzh/backup/$CNYWALLETBACKUP s3://elasticbeanstalk-us-west-2-551441213847/POSBackup/)
   echo "`date -u` upload cnywallet return $output $?"
 fi
+
+echo "`date -u` cd /home/ubuntu/workspace/kjwzh/backup"
+cd /home/ubuntu/workspace/kjwzh/backup
+echo "`date -u` find . -type f -mtime +15 -exec rm -rf {} \;"
+find . -type f -mtime +15 -exec rm -rf {} \;
+
