@@ -4,7 +4,7 @@ output=$(/usr/bin/curl -v -k https://www.9lp.com/settlement.php)
 echo "`date -u` settlement output is $output"
 echo "`date -u` settlement return is $?"
 
-CNYDIR=/tmp/cnyfund/mount
+CNYDIR=/home/ubuntu/cnyfund/mount
 POSBACKUPSQL=pos-backup-$(date +%F).sql
 QRCODEBACKUP=qrcode-img-$(date +%F).tar.gz
 CNYWALLETBACKUP=pos-cnywallet-$(date +%F).dat
@@ -29,11 +29,10 @@ echo "`date -u` upload return $output $?"
 
 if [ -d "$CNYDIR" ]; then
   echo "`date -u` backup cnywallet files"
-  echo "`date -u` cd $CNYROOT"
-  cd $CNYROOT
-  echo "`date -u` sudo /usr/bin/docker exec 390 /opt/cnyfund/bin/cnyfund -datadir=/cnyfund -conf=/cnyfund/cnyfund.conf backupwallet /cnyfund/$CNYWALLETBACKUP"
-  sudo /usr/bin/docker exec 390 /opt/cnyfund/bin/cnyfund -datadir=/cnyfund -conf=/cnyfund/cnyfund.conf backupwallet /cnyfund/$CNYWALLETBACKUP
-  sudo mv /tmp/cnyfund/mount/$CNYWALLETBACKUP /home/ubuntu/workspace/kjwzh/backup/$CNYWALLETBACKUP 
+  echo "`date -u` sudo /usr/bin/docker exec 54c /opt/cnyfund/bin/cnyfund -datadir=/cnyfund -conf=/cnyfund/cnyfund.conf backupwallet /cnyfund/$CNYWALLETBACKUP"
+  sudo /usr/bin/docker exec 54c /opt/cnyfund/bin/cnyfund -datadir=/cnyfund -conf=/cnyfund/cnyfund.conf backupwallet /cnyfund/$CNYWALLETBACKUP
+  sudo mv /home/ubuntu/cnyfund/mount/$CNYWALLETBACKUP /home/ubuntu/workspace/kjwzh/backup/$CNYWALLETBACKUP 
   sudo chown ubuntu:ubuntu /home/ubuntu/workspace/kjwzh/backup/$CNYWALLETBACKUP
-output=$(/home/ubuntu/.local/bin/aws s3 cp /home/ubuntu/workspace/kjwzh/backup/$CNYWALLETBACKUP s3://elasticbeanstalk-us-west-2-551441213847/POSBackup/)
+  output=$(/home/ubuntu/.local/bin/aws s3 cp /home/ubuntu/workspace/kjwzh/backup/$CNYWALLETBACKUP s3://elasticbeanstalk-us-west-2-551441213847/POSBackup/)
+  echo "`date -u` upload cnywallet return $output $?"
 fi
