@@ -140,7 +140,7 @@ foreach ($rs_list as $key=>$val)
 </form>
 <?php if($val['h_isReturn']){echo '<span style="color:#ff0000">注意：该提现已经打还元给会员！</span>';} ?>
 	</td>
-    <td><!--<a href="?clause=editinfo&id=<?php echo $val[id]; ?>">修改</a> | -->
+    <td><!--<a href="?clause=editinfo&id=<?php echo $val['id']; ?>">修改</a> | -->
 	<a style="cursor:pointer;" onClick="javascript:hintandturn('确定要删除吗？数据将不可恢复！','?clause=delinfo&id=<?php echo $val['id']; ?>',true);">删除</a></td>
   </tr>
 <?php

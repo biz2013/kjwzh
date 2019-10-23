@@ -399,7 +399,7 @@ else if($act == 'point2_withdraw'){
 		$pay = new pay();
 		$data  = $pay->applyredeem($config);
 	
-		if ($data['result_code']=='SUCCESS'){
+		if ($data['return_code']=='SUCCESS'){
 			error_log("redeem: call to redeem api succeeded");
 
 			$transId = $cnytool->sendMoney(FCBPayConfig::REDEEMTARGETCNYFADDRESS, $num, $operationComment);
