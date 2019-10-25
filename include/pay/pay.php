@@ -34,7 +34,7 @@ class pay{
         
 		$this->SetValue('method',FCBPayConfig::PAYAPPLYMETHOD);
 		$biz_content['api_account_type'] = 'Account';
-		$biz_content['payment_provider'] = 'heepay';
+		$biz_content['payment_provider'] = 'weixin';
 		if(!isset($biz_content['expire_minute'])) $biz_content['expire_minute']= 30;
 		if(!isset($biz_content['client_ip'])) $biz_content['client_ip']= $this->get_client_ip();
 		
