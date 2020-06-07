@@ -137,7 +137,6 @@ li img{display:inherit;}
         <p><a href="/member/jintix.php">提现</a></p>
     </div>
             
-        </ul>
 </div>
 <div class="mian_zxr">
         <p><a href="/member/jincz.php">充值</a></p>
@@ -228,10 +227,8 @@ li img{display:inherit;}
                 <p>退出</p>
           </a>      </li>-->
       </ul>
-	   <div class="hstbj"></div>
 </div>	   
 				  <div class="mian_qd">
-      <h3>客服QQ：2735113810</h3>
       <ul>
 			  <li>
             <a href="/member/cnychongzhi.php" onClick="ewm();">
